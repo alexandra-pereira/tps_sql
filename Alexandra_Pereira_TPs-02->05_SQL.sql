@@ -215,3 +215,27 @@ JOIN COMPO ON BON.ID = COMPO.ID_BON
 JOIN ARTICLE ON COMPO.ID_ART = ARTICLE.ID
 JOIN FOURNISSEUR ON BON.ID_FOU = FOURNISSEUR.ID
 GROUP BY FOURNISSEUR.NOM;
+
+
+-- TP 06  Mise à jour de données 
+
+-- 1) Désactivation du mode « safe update »
+SET SQL_SAFE_UPDATES = 0;
+
+-- 2) Requête a : Mettez en majuscules les désignations de tous les articles dont le prix est strictement supérieur à 10€
+UPDATE ARTICLE
+SET DESIGNATION = UPPER(DESIGNATION)
+WHERE PRIX > 10;
+
+-- 3) Requête b : Mettez en minuscules la désignation de l’article dont l’identifiant est 2
+UPDATE ARTICLE
+SET DESIGNATION = LOWER(DESIGNATION)
+WHERE ID = 2;
+
+-- 4) Requête c : Augmentez les prix de 10% pour tous les articles du fournisseur FDM SA
+UPDATE ARTICLE A
+JOIN FOURNISSEUR F ON A.ID_FOU = F.ID
+SET A.PRIX = A.PRIX * 1.10
+WHERE F.NOM = 'FDM SA';
+
+
